@@ -1,4 +1,4 @@
-package com.stepDefinitions;
+package com.stepDefinition;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -42,17 +42,8 @@ public class Hooks extends Base{
 	@After
 	public void teardown() {
 		Base.sleep();
-		driver.quit();
+		//driver.quit();
 	}
 	
-	@BeforeStep
-	public void beforeStep() {
-		
-	}
-	
-	@AfterStep
-	public void afterStep() {
-		
-	}
 
 }

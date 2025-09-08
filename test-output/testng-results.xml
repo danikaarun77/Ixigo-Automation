@@ -1,27 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-09-07T21:02:10 IST" name="Default suite" finished-at="2025-09-07T21:02:27 IST" duration-ms="16826">
+  <suite started-at="2025-09-08T23:34:25 IST" name="Default suite" finished-at="2025-09-08T23:35:11 IST" duration-ms="45619">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.runner.TestRunner@77888435]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.runner.TestRunner@36fc695d]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2025-09-07T21:02:10 IST" name="Default test" finished-at="2025-09-07T21:02:27 IST" duration-ms="16826">
+    <test started-at="2025-09-08T23:34:25 IST" name="Default test" finished-at="2025-09-08T23:35:11 IST" duration-ms="45619">
       <class name="com.runner.TestRunner">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.runner.TestRunner@77888435]" started-at="2025-09-07T21:02:10 IST" name="setUpClass" finished-at="2025-09-07T21:02:11 IST" duration-ms="859" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.runner.TestRunner@36fc695d]" started-at="2025-09-08T23:34:25 IST" name="setUpClass" finished-at="2025-09-08T23:34:26 IST" duration-ms="917" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@12a14b74]]>
+                <![CDATA[org.testng.TestRunner@4b0bd001]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.runner.TestRunner@77888435]" started-at="2025-09-07T21:02:11 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-09-07T21:02:20 IST" duration-ms="9082" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.runner.TestRunner@36fc695d]" started-at="2025-09-08T23:34:26 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-09-08T23:34:42 IST" duration-ms="16100" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Successful flight search"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["flight searching successfully"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //input[@placeholder='Enter city or airport' and @name='origin'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '24.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.155, chrome: {chromedriverVersion: 139.0.7258.154 (9e0d6b2b47f..., userDataDir: C:\Users\Danica\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57699}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57699/devtoo..., se:cdpVersion: 139.0.7258.155, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 15436a0cffe3646dfe3bc86d689dc066]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //input[@placeholder='Enter city or airport' and @name='origin'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '24.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.155, chrome: {chromedriverVersion: 139.0.7258.154 (9e0d6b2b47f..., userDataDir: C:\Users\Danica\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57699}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57699/devtoo..., se:cdpVersion: 139.0.7258.155, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 15436a0cffe3646dfe3bc86d689dc066
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+at com.pages.Searchingpage.selectFromTo(Searchingpage.java:34)
+at com.stepDefinition.searchingdefinitions.the_user_selects_the_from_as_and_to_as(searchingdefinitions.java:27)
+at ✽.the user selects the from as "Chennai" and to as "New Delhi"(file:///D:/Eclipse/eclipse/ixigowebsiteautomation/src/test/resources/Features/flightsearch.feature:5)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.runner.TestRunner@36fc695d]" started-at="2025-09-08T23:34:42 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-09-08T23:35:10 IST" duration-ms="28010" status="FAIL">
           <params>
             <param index="0">
               <value>
@@ -30,30 +70,40 @@
             </param>
             <param index="1">
               <value>
-                <![CDATA["Ixigo Login with Mobile Number"]]>
+                <![CDATA["Mobile Login"]]>
               </value>
             </param>
           </params>
+          <exception class="io.cucumber.testng.UndefinedStepException">
+            <message>
+              <![CDATA[The step 'the user should be navigated to the booking page' is undefined.
+You can implement this step using the snippet(s) below:
+
+@Then("the user should be navigated to the booking page")
+public void the_user_should_be_navigated_to_the_booking_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[io.cucumber.testng.UndefinedStepException: The step 'the user should be navigated to the booking page' is undefined.
+You can implement this step using the snippet(s) below:
+
+@Then("the user should be navigated to the booking page")
+public void the_user_should_be_navigated_to_the_booking_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+at ✽.the user should be navigated to the booking page(file:///D:/Eclipse/eclipse/ixigowebsiteautomation/src/test/resources/Features/login.feature:8)
+]]>
+            </full-stacktrace>
+          </exception> <!-- io.cucumber.testng.UndefinedStepException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.runner.TestRunner@77888435]" started-at="2025-09-07T21:02:20 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-09-07T21:02:27 IST" duration-ms="6460" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Unsuccessful login with invalid mobile number"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Ixigo Login with Mobile Number"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.runner.TestRunner@77888435]" started-at="2025-09-07T21:02:27 IST" name="tearDownClass" finished-at="2025-09-07T21:02:27 IST" duration-ms="356" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.runner.TestRunner@36fc695d]" started-at="2025-09-08T23:35:10 IST" name="tearDownClass" finished-at="2025-09-08T23:35:11 IST" duration-ms="498" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
