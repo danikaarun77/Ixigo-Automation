@@ -8,6 +8,7 @@ public class Locators {
     public static By continuebutton=By.xpath("//button[text()='Continue']");
     public static By otpInputs=By.xpath("//input[@type='tel' or @inputmode='numeric']");
     public static By verify = By.xpath("//*[text()='Verify' or normalize-space()='Verify']");
+<<<<<<< HEAD
     public static By flight = By.xpath("//a[@href='/flights']");
     public static By round = By.xpath("//button[text()='Round Trip']");	
     public static By from = By.xpath("/html/body/main/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div");
@@ -58,3 +59,7 @@ public class Locators {
     }
 
 }
+=======
+    		
+}
+>>>>>>> 825a72480ba566cd572f1affd3f4e98dc04ca366

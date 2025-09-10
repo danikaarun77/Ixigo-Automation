@@ -9,6 +9,7 @@ Feature: Mobile Login
 
     Examples:
       | Mobile_no   |
+<<<<<<< HEAD
       | 7845286577 |
 
   @NegativeLogin
@@ -21,3 +22,8 @@ Feature: Mobile Login
     Examples:
       | Mobile_No | error_message               |
       | 12345     | Please enter a valid number |
+=======
+      | 9003855489 |
+
+ 
+>>>>>>> 825a72480ba566cd572f1affd3f4e98dc04ca366
