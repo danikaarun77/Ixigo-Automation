@@ -14,47 +14,75 @@ import com.aventstack.extentreports.Status;
 
 public class Reporter {
 
-    public static void generateReport(WebDriver driver, ExtentTest extTest, Status status, String stepMessage) {
-        if (status.equals(Status.PASS)) {
-            System.out.println(" ******* " + stepMessage + " is passed");
-            extTest.log(status, stepMessage);
-        } else if (status.equals(Status.FAIL)) {
-            System.out.println("***************** step is failed");
-            try {
-                String screenshotPath = captureScreenshot(driver, stepMessage);
-                extTest.log(status, stepMessage,
-                        MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-            } catch (IOException e) {
-                e.printStackTrace();
-                extTest.log(status, stepMessage + " (Screenshot capture failed!)");
+    // Change folder if you want; using project-dir/reports/screenshots
+    private static final String SCREENSHOTS_DIR = System.getProperty("user.dir")
+            + File.separator + "reports" + File.separator + "screenshots";
+
+    public static void generateReport(WebDriver driver, ExtentTest test, Status status, String message) {
+        try {
+            String screenshotPath = captureScreenshot(driver, message);
+            if (screenshotPath != null) {
+                test.log(status, message, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+            } else {
+                test.log(status, message);
             }
+        } catch (Exception e) {
+            // If anything goes wrong attaching screenshot, still log the step.
+            test.log(status, message);
+            test.log(Status.WARNING, "Could not attach screenshot: " + e.getMessage());
         }
     }
 
-<<<<<<< HEAD
-    public static String captureScreenshot(WebDriver driver, String screenshotName) throws IOException {
-    	screenshotName = screenshotName.replaceAll("[^a-zA-Z0-9_-]", "_");
-        String path = "reports/screenshots/" + screenshotName + "_" + System.currentTimeMillis() + ".png";
-        File dest = new File(path);
-        dest.getParentFile().mkdirs();
-        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    public static String captureScreenshot(WebDriver driver, String screenshotName) {
+        if (driver == null) return null;
+        // sanitize name (remove windows-invalid filename characters)
+        String safeName = sanitizeFileName(screenshotName);
 
-=======
-    public static String captureScreenshot(WebDriver driver, String fileName) throws IOException {
-        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            File dir = new File(SCREENSHOTS_DIR);
+            if (!dir.exists()) dir.mkdirs();
 
-        // Always use a safe folder
-        String destDir = System.getProperty("user.dir") + File.separator + "screenshots";
-        new File(destDir).mkdirs();
+            String fileName = safeName + "_" + System.currentTimeMillis() + ".png";
+            File destFile = new File(dir, fileName);
 
-        // Replace invalid characters in filename
-        String safeFileName = fileName.replaceAll("[^a-zA-Z0-9-_\\.]", "_") + ".png";
-        File dest = new File(destDir + File.separator + safeFileName);
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
->>>>>>> 825a72480ba566cd572f1affd3f4e98dc04ca366
-        FileUtils.copyFile(src, dest);
+            // ensure parent exists (redundant but safe)
+            File parent = destFile.getParentFile();
+            if (parent != null && !parent.exists()) parent.mkdirs();
 
-        // ✅ return the full path (for ExtentReport to attach)
-        return dest.getAbsolutePath();
+            // Copy screenshot
+            FileUtils.copyFile(srcFile, destFile);
+
+            return destFile.getAbsolutePath();
+        } catch (IOException ioe) {
+            // fallback: try a safe default filename (no message text)
+            try {
+                File dir = new File(SCREENSHOTS_DIR);
+                if (!dir.exists()) dir.mkdirs();
+                File destFile = new File(dir, "screenshot_" + System.currentTimeMillis() + ".png");
+                File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                FileUtils.copyFile(srcFile, destFile);
+                return destFile.getAbsolutePath();
+            } catch (Exception ex) {
+                // last resort: give up attaching screenshot
+                return null;
+            }
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    private static String sanitizeFileName(String name) {
+        if (name == null) return "screenshot";
+        String s = name.trim();
+        if (s.isEmpty()) return "screenshot";
+        // Replace invalid Windows filename characters with underscore
+        s = s.replaceAll("[\\\\/:*?\"<>|]", "_");
+        // Collapse long whitespace
+        s = s.replaceAll("\\s+", " ");
+        // Limit filename length to avoid very long paths
+        if (s.length() > 120) s = s.substring(0, 120);
+        return s;
     }
 }

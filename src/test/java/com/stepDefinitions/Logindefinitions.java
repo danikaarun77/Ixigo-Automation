@@ -21,7 +21,7 @@ public class Logindefinitions {
 	public void the_user_is_on_the_login_page() {
 		// ✅ initialize here for both positive & negative flows
 		loginPage = new Loginpage(driver, extTest);
-		loginPage.loadCookiesFromFile("Cookies.data");
+		loginPage.handlePopupIfExists();
 		String expRes = "https://www.ixigo.com/";
 		String actRes = driver.getCurrentUrl();
 		Assert.assertEquals(actRes, expRes, "User is not on Ixigo login page!");
@@ -30,8 +30,10 @@ public class Logindefinitions {
 
 	// --------- Negative flow ---------
 	@When("the user enters invalid mobileno as {string}")
+	
 	public void the_user_enters_invalid_mobileno_as(String invalidMobile) {
-		loginPage.invalidnumber(invalidMobile);
+		loginPage.handlePopupIfExists();
+		loginPage.invalidNumber(invalidMobile);
 	}
 
 	@When("the user clicks the login button")
@@ -57,9 +59,6 @@ public class Logindefinitions {
 		loginPage.enterOtpManually();
 		Base.sleep();
 
-		if (loginPage.navigatedpage()) {
-			loginPage.saveCookiesToFile("Cookies.data");
-		}
 
 	}
 
@@ -67,4 +66,8 @@ public class Logindefinitions {
 	public void the_user_should_be_navigated_to_the_booking_page() {
 		Assert.assertTrue(loginPage.navigatedpage(), "User not navigated to booking page");
 	}
-}
+	
+	}
+
+	
+

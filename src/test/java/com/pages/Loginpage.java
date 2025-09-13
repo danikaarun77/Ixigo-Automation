@@ -1,24 +1,10 @@
 package com.pages;
 
-<<<<<<< HEAD
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.util.Date;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-=======
 import java.time.Duration;
 import java.util.List;
-import java.util.Scanner;
 
 import org.openqa.selenium.By;
->>>>>>> 825a72480ba566cd572f1affd3f4e98dc04ca366
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,151 +16,6 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.objectrepository.Locators;
 import com.parameters.Reporter;
-<<<<<<< HEAD
-
-public class Loginpage {
-
-	WebDriver driver;
-	WebDriverWait wait;
-	ExtentTest extTest;
-
-	public Loginpage(WebDriver driver, ExtentTest extTest) {
-		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		this.extTest = extTest;
-	}
-
-	public void clickLoginButton() {
-		wait.until(ExpectedConditions.elementToBeClickable(Locators.loginbutton)).click();
-
-	}
-
-	public boolean enterMobileNumber(String mobile) {
-		clickLoginButton();
-		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.mobile)).sendKeys(mobile);
-			Reporter.generateReport(driver, extTest, Status.PASS, "Mobile number entered");
-			return true;
-		} catch (Exception e) {
-			Reporter.generateReport(driver, extTest, Status.FAIL, "Failed to enter mobile number");
-			return false;
-		}
-	}
-
-	public boolean clickContinueForMobile() {
-		try {
-			wait.until(ExpectedConditions.elementToBeClickable(Locators.continuebutton)).click();
-			Reporter.generateReport(driver, extTest, Status.PASS, "Clicked Continue for mobile");
-			return true;
-		} catch (Exception e) {
-			Reporter.generateReport(driver, extTest, Status.FAIL, "Failed to click Continue");
-			return false;
-		}
-	}
-
-	public boolean enterOtpManually() {
-		try {
-			System.out.print("Enter OTP from SMS: ");
-			java.util.Scanner sc = new java.util.Scanner(System.in);
-			String otp = sc.nextLine();
-			sc.close();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.otpInputs)).sendKeys(otp);
-			Reporter.generateReport(driver, extTest, Status.PASS, "OTP entered");
-			return true;
-		} catch (Exception e) {
-			Reporter.generateReport(driver, extTest, Status.FAIL, "Failed to enter OTP");
-			return false;
-		}
-	}
-
-	public boolean navigatedpage() {
-		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='One Way']")));
-			Reporter.generateReport(driver, extTest, Status.PASS, "Flight details displayed");
-			return true;
-		} catch (TimeoutException te) {
-			Reporter.generateReport(driver, extTest, Status.FAIL, "Navigation failed");
-			return false;
-		}
-
-	}
-
-	public void invalidnumber(String number) {
-		clickLoginButton();
-		WebElement mobileInput = wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.mobile));
-		mobileInput.clear();
-		mobileInput.sendKeys(number);
-	}
-
-	public void verifyErrorMessage(String expectedMessage) {
-		WebElement errorMsg = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//div[text()='Please enter a valid phone number']")));
-		Assert.assertTrue(errorMsg.isDisplayed(), "Please enter a valid phone number");
-	}
-
-	public void loadCookiesFromFile(String filePath) {
-		File file = new File(filePath);
-		if (!file.exists())
-			return;
-		try {
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				String[] token = line.split(";", 7); // Increased split limit
-				if (token.length == 7) {
-					String name = token[0];
-					String value = token[1];
-					String domain = token[2];
-					String path = token[3];
-					Date expiry = null;
-					if (!token[4].isEmpty()) {
-						expiry = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(token[4]);
-					}
-					boolean isSecure = Boolean.parseBoolean(token[5]);
-					boolean isHttpOnly = Boolean.parseBoolean(token[6]);
-
-					Cookie.Builder builder = new Cookie.Builder(name, value).domain(domain).path(path)
-							.isSecure(isSecure).isHttpOnly(isHttpOnly);
-					if (expiry != null) {
-						builder.expiresOn(expiry);
-					}
-					driver.manage().addCookie(builder.build());
-				} else {
-					System.err.println("Skipping malformed cookie line: " + line);
-				}
-			}
-			bufferedReader.close();
-			fileReader.close();
-			driver.navigate().refresh();
-			System.out.println("Cookies loaded successfully");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void saveCookiesToFile(String filePath) {
-		File file = new File(filePath);
-		try {
-			file.delete();
-			file.createNewFile();
-			FileWriter fileWriter = new FileWriter(file);
-			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-			for (Cookie ck : driver.manage().getCookies()) {
-				bufferedWriter.write(ck.getName() + ";" + ck.getValue() + ";" + ck.getDomain() + ";" + ck.getPath()
-						+ ";" + (ck.getExpiry() != null ? ck.getExpiry().toString() : "") + ";" + ck.isSecure() + ";"
-						+ ck.isHttpOnly());
-				bufferedWriter.newLine();
-			}
-			bufferedWriter.close();
-			fileWriter.close();
-			System.out.println("Cookies saved successfully");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-}
-=======
 import com.setup.Base;
 
 public class Loginpage {
@@ -189,68 +30,46 @@ public class Loginpage {
         this.extTest = extTest;
     }
 
-    // ---------- common ----------
-    private void handlePopupIfExists() {
-        try {
-            List<WebElement> popups = driver.findElements(By.id("wiz-iframe-intent"));
-            if (!popups.isEmpty()) {
-                driver.switchTo().frame(popups.get(0));
-                driver.findElement(By.id("closeButton")).click();
-                driver.switchTo().defaultContent();
-                System.out.println("Popup closed successfully");
-            }
-        } catch (Exception ignore) {
-        }
-    }
-
-    private void clickLoginButton() {
+    public void clickLoginButton() {
         wait.until(ExpectedConditions.elementToBeClickable(Locators.loginbutton)).click();
-        Base.sleep();
-        handlePopupIfExists();
     }
 
-    // ---------- positive login ----------
-    public boolean enterMobileNumber(String mobileNo) {
-        handlePopupIfExists();
+    public boolean enterMobileNumber(String mobile) {
         clickLoginButton();
         try {
-            WebElement mobileField = wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.mobile));
-            mobileField.clear();
-            mobileField.sendKeys(mobileNo);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.mobile)).sendKeys(mobile);
+            Reporter.generateReport(driver, extTest, Status.PASS, "Mobile number entered");
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            Reporter.generateReport(driver, extTest, Status.FAIL, "Failed to enter mobile number");
             return false;
         }
     }
 
-    public void clickContinueForMobile() {
-        handlePopupIfExists();
-        WebElement continueBtn = wait.until(ExpectedConditions.elementToBeClickable(Locators.continuebutton));
-        continueBtn.click();
-        System.out.println("Clicked Continue successfully");
+    public boolean clickContinueForMobile() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(Locators.continuebutton)).click();
+            Reporter.generateReport(driver, extTest, Status.PASS, "Clicked Continue for mobile");
+            return true;
+        } catch (Exception e) {
+            Reporter.generateReport(driver, extTest, Status.FAIL, "Failed to click Continue");
+            return false;
+        }
     }
 
-    public void enterOtpManually() {
-        Scanner kebd = new Scanner(System.in);
-        System.out.print("Enter OTP from SMS: ");
-        String otp = kebd.nextLine();
-
-        List<WebElement> otpInputs = wait.until(
-                ExpectedConditions.visibilityOfAllElementsLocatedBy(Locators.otpInputs)
-        );
-
-        System.out.println("DEBUG: Found " + otpInputs.size() + " OTP input boxes");
-        System.out.println("DEBUG: Entering OTP: " + otp);
-
-        if (otpInputs.size() > 1) {
-            for (int i = 0; i < otp.length() && i < otpInputs.size(); i++) {
-                otpInputs.get(i).clear();
-                otpInputs.get(i).sendKeys(Character.toString(otp.charAt(i)));
-            }
-        } else {
-            otpInputs.get(0).clear();
-            otpInputs.get(0).sendKeys(otp);
+    public boolean enterOtpManually() {
+        try {
+        	handlePopupIfExists();
+            System.out.print("Enter OTP from SMS: ");
+            java.util.Scanner sc = new java.util.Scanner(System.in);
+            String otp = sc.nextLine();
+            sc.close();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.otpInputs)).sendKeys(otp);
+            Reporter.generateReport(driver, extTest, Status.PASS, "OTP entered");
+            return true;
+        } catch (Exception e) {
+            Reporter.generateReport(driver, extTest, Status.FAIL, "Failed to enter OTP");
+            return false;
         }
     }
 
@@ -264,5 +83,76 @@ public class Loginpage {
             return false;
         }
     }
+
+    public void invalidNumber(String number) {
+        handlePopupIfExists(); // Close any popups first
+
+        // Open login modal
+        WebElement loginBtn = wait.until(ExpectedConditions.elementToBeClickable(Locators.loginbutton));
+        loginBtn.click();
+
+        // Wait for mobile input to be visible
+        WebElement mobileInput = wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.mobile));
+
+        // Clear and focus input using JS
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mobileInput);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='';", mobileInput);
+
+        // Try sending keys first
+        try {
+            mobileInput.sendKeys(number);
+        } catch (Exception e) {
+            // Fallback: JS typing
+            ((JavascriptExecutor) driver).executeScript("arguments[0].value=arguments[1];", mobileInput, number);
+        }
+
+        // Verify the value
+        String typedValue = mobileInput.getAttribute("value");
+        if (!typedValue.equals(number)) {
+            // Force via JS again if still wrong
+            ((JavascriptExecutor) driver).executeScript("arguments[0].value=arguments[1];", mobileInput, number);
+        }
+
+        // Click login/submit button with safe JS fallback
+        WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(Locators.loginbutton));
+        try {
+            submitBtn.click();
+        } catch (Exception e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitBtn);
+        }
+    }
+
+
+    public void verifyErrorMessage(String expectedMessage) {
+        WebElement errorMsg = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//div[text()='Please enter a valid phone number']")));
+        Assert.assertTrue(errorMsg.isDisplayed(), "Please enter a valid phone number");
+    }
+
+    // ✅ Handle unexpected popups
+    public void handlePopupIfExists() {
+        try {
+            WebElement closeBtn = new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.elementToBeClickable(By.id("closeButton")));
+            closeBtn.click();
+            new WebDriverWait(driver, Duration.ofSeconds(1))
+                .until(ExpectedConditions.invisibilityOf(closeBtn));
+        } catch (Exception ignore) {}
+
+        try {
+            List<WebElement> iframes = driver.findElements(By.id("wiz-iframe-intent"));
+            if (!iframes.isEmpty()) {
+                driver.switchTo().frame("wiz-iframe-intent");
+                WebElement closeBtn = new WebDriverWait(driver, Duration.ofSeconds(3))
+                    .until(ExpectedConditions.elementToBeClickable(By.id("closeButton")));
+                closeBtn.click();
+                new WebDriverWait(driver, Duration.ofSeconds(1))
+                    .until(ExpectedConditions.invisibilityOf(closeBtn));
+                driver.switchTo().defaultContent();
+            }
+        } catch(Exception e) {
+            try { driver.switchTo().defaultContent(); } catch(Exception ex) {}
+        }
+    }
+    
 }
->>>>>>> 825a72480ba566cd572f1affd3f4e98dc04ca366

@@ -8,15 +8,18 @@ public class Locators {
     public static By continuebutton=By.xpath("//button[text()='Continue']");
     public static By otpInputs=By.xpath("//input[@type='tel' or @inputmode='numeric']");
     public static By verify = By.xpath("//*[text()='Verify' or normalize-space()='Verify']");
-<<<<<<< HEAD
     public static By flight = By.xpath("//a[@href='/flights']");
-    public static By round = By.xpath("//button[text()='Round Trip']");	
+    public static By oneway = By.xpath("//button[text()='One Way']");	
     public static By from = By.xpath("/html/body/main/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div");
+
     public static By click_from = By.xpath("/html/body/main/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[2]/div/div/div[2]/input");
-    public static By to = By.xpath("/html/body/main/div[2]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div");
-    public static By click_to = By.xpath("/html/body/main/div[2]/div[1]/div[3]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/input");
-    public static By searchButton = By.xpath("//button[normalize-space()='Search' or contains(@class,'search')]");
-    public static By travellersPanel = By.xpath("//div[contains(text(),'Travellers') or contains(@class,'traveller') or contains(@class,'passenger')]");
+
+    public static By to = By.xpath("(//div[contains(@class,'autocompleter')])[2]");
+
+    public static By click_to = By.xpath("(//input[contains(@class,'outline-none') and contains(@class,'text-primary')])[2]");
+    public static By searchButton = By.xpath("//button[normalize-space()='Search']");
+
+    public static By travellersPanel = By.xpath("//p[text()='1 Traveller,  Economy']");
    // public static By adultsPlusBtn = By.xpath("//button[text()='"+adults+"']");
     public static By childrenPlusBtn = By.xpath("(//button[contains(.,'+')])[2]");
     public static By infantsPlusBtn = By.xpath("(//button[contains(.,'+')])[3]");
@@ -45,9 +48,9 @@ public class Locators {
 
     
    //----------------------------------------------------
-    
+    public static By selectionPageMarker = By.xpath(
+    	    "//div[contains(@class,'selection-page')]//p[contains(text(),'Your Flight Selection')]");
 
-   
     public static By travelClassOption(String cls) {
         String xpath = String.format(
             "//li[normalize-space(.)='%s'] | " +
@@ -57,9 +60,17 @@ public class Locators {
         );
         return By.xpath(xpath);
     }
+ // Header text "News And Travel Stories"
+    public static By storiesHeader = By.xpath("//h2[contains(text(),'News And Travel Stories')]");
+
+    // All story items (anchors with data-testid='listItem')
+    public static By storiesItems = By.cssSelector("a[data-testid='listItem']");
+
+    // Story caption text inside each story
+    public static By storiesCaption = By.cssSelector("a[data-testid='listItem'] p.body-sm");
+
+    // First story (direct access)
+    public static By firstStory = By.xpath("(//a[@data-testid='listItem'])[1]");
 
 }
-=======
-    		
-}
->>>>>>> 825a72480ba566cd572f1affd3f4e98dc04ca366
+
